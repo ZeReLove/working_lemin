@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/22 16:27:53 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/26 18:34:28 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/28 16:47:03 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ int			main(int argc, char **argv)
 			exit(1);
 		room = reading_data(&str, line, fd);
 		printf("\n");
-		if (checking_data(&str))
+		if (room_nb == 2)
+			print_for_start_end(&str, room);
+		if (checking_data(&str, room) && room_nb != 2)
 		{
 			if (!(path_list = algorithm(str.start_room, str.end_room, room)))
-				map_error();
+				map_error(room, &str);
 			arr = creating_of_array();
 			clean_pathes(number_of_pathes(&str, path_list, arr), &str,
 				path_list);
@@ -94,10 +96,12 @@ int			main(int argc, char **argv)
 // 		// 	exit (1);
 // 		room = reading_data(&str, line, fd);
 // 		printf("\n");
-// 		if (checking_data(&str))
+// 		if (room_nb == 2)
+// 			print_for_start_end(&str, room);
+// 		if (checking_data(&str, room) && room_nb != 2)
 // 		{
 // 			if (!(path_list = algorithm(str.start_room, str.end_room, room)))
-// 				map_error();
+// 				map_error(room, &str);
 // 			arr = creating_of_array();
 // 			clean_pathes(number_of_pathes(&str, path_list, arr), &str, path_list);
 // 			ants_going_through_graph(path_list, str.number_of_pathes, &str);

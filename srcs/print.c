@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/24 15:32:32 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/28 16:43:59 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,24 @@ void		moving_ants(int *array_num_ant, t_data *read, int *value_of_ants, t_plist 
 		(*value_of_ants)++;
 		j--;
 		tmp = tmp->next;
+	}
+}
+
+void print_for_start_end(t_data *str, t_room *room)
+{
+	int		count;
+	
+	count = 1;
+	if (checking_data(str, room))
+	{
+		while (count <= str->amount_of_ants)
+		{
+			if (count != str->amount_of_ants)
+				printf("L%i-%s ", count, str->end);
+			else
+				printf("L%i-%s\n", count, str->end);
+			count++;
+		}
+		
 	}
 }

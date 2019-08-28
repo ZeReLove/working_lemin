@@ -36,9 +36,11 @@ int			cutting_path(t_room *start, t_room *finish, t_plist *first, int *index) //
 	
 	new = NULL;
 	tmp = first;
-	if (first != NULL)
+	if (first)
 	{
-		//idx_for_make_plist = 0;
+		// if (!first->next || !first->path->room->name)
+		// 	make_path_list(tmp, new);
+		// idx_for_make_plist = 0;
 		unblock_rooms(tmp);
 		block_direction(tmp, start);
 		while (tmp->next)
@@ -54,7 +56,7 @@ int			cutting_path(t_room *start, t_room *finish, t_plist *first, int *index) //
 		unblock_direction(first, start);
 		free_pathlist((first)->path, first);
 		*index = 0;
-		first = NULL;
+		//first->path = NULL;
 	}
 	return (1);
 }

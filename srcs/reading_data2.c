@@ -48,7 +48,7 @@ void 		sorting_rooms(t_room *room, int low, int high, t_data *str) // норма
 	}
 }
 
-t_room	*find_room(char *buff, t_room *room) //норма
+t_room	*find_room(char *buff, t_room *room, t_data *str) //норма
 {
 	int start;
 	int end;
@@ -56,7 +56,7 @@ t_room	*find_room(char *buff, t_room *room) //норма
 	int	res;
 
 	start = 0;
-	end = room_nb - 1; //changed
+	end = room_nb - 1; //changed (-1)
 	while (start <= end)
 	{
 		middle = (start + end) / 2;
@@ -68,7 +68,7 @@ t_room	*find_room(char *buff, t_room *room) //норма
 		else
 			return (&room[middle]);
 	}
-	map_error();
+	map_error(room, str);
 	return (NULL);
 }
 
@@ -86,7 +86,7 @@ int		checking_dash(char *line) //норма
 	return (0);
 }
 
-void	other_rooms(char *line, t_room *room) //норма
+void	other_rooms(char *line, t_room *room, t_data *str) //норма
 {
 	int	i;
 
@@ -94,10 +94,12 @@ void	other_rooms(char *line, t_room *room) //норма
 	while (line[i] != ' ')
 		i++;
 	line[i] = '\0';
+	checking_duplicates(room, line, str);
 	room[room_nb].name = ft_strdup(line);
 	room[room_nb].value = NOT_GIVEN;
 	room[room_nb].status = OPENED;
 	room[room_nb].is_ant_inside = 0;
 	room_nb++;
 	free(line);
+	line = NULL;
 }

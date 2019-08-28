@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/24 16:02:03 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/28 16:44:19 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,28 +109,29 @@ void				find_room2(t_path *path, t_room *room);
 int					find_room3(t_path *path, t_room *room);
 void				unblock_rooms(t_plist *plist);
 
-int     			checking_data(t_data *str);
-int     			check_room(char **line);
-int     			check_ants(const int fd, char **line);
+int     			checking_data(t_data *str, t_room *room);
+int     			check_room(char **line, t_room *room, t_data *str);
+int     			check_ants(const int fd, char **line, t_room *room, t_data *str);
 void     			check(char *line, int fd, t_data *str, t_room *room, int *index);
+void    			checking_duplicates(t_room *room, char *room_name, t_data *str);
 
 t_room				*reading_data(t_data *str, char *line, int fd);
 void				read_start(char *line, int fd, t_data *str, t_room *room);
 void				read_end(char *line, int fd, t_data *str, t_room *room);
-void				room_connections(t_room *room, char *line);
+void				room_connections(t_room *room, char *line, t_data *str);
 void				make_start(t_data *str, t_room *room, char *line);
 void				make_end(t_data *str, t_room *room, char *line);
 t_room				*make_struct_arr();
-void    			make_neighb_list(t_room *rooms, char *line, t_room *room);
+void    			make_neighb_list(t_room *rooms, char *line, t_room *room, t_data *str);
 
 t_array				*creating_of_array();
 int 				number_of_pathes(t_data *read, t_plist *pointers, t_array *pathes);
 void				comparing_of_values(t_array *pathes, int number_of_steps, int num_p);
 
 void				sorting_rooms(t_room *room, int low, int high, t_data *str);
-t_room				*find_room(char *buff, t_room *room);
+t_room				*find_room(char *buff, t_room *room, t_data *str);
 int					checking_dash(char *line);
-void				other_rooms(char *line, t_room *room);
+void				other_rooms(char *line, t_room *room, t_data *str);
 
 void 				ants_going_through_graph(t_plist *pointers, int num_of_pathes, t_data *read);
 void				moving_ants(int *array_num_ant, t_data *read, int *value_of_ants, t_plist *plist);
@@ -138,6 +139,7 @@ void				ants_inside(t_plist *pointers, int i, t_data *read);
 
 void				print_room(t_plist *tmp, int *ant_val, t_data *read, int *array_num_ant);
 void				ants_printing(t_plist *plist, int *value_of_ants, int *array_num_ant, t_data *read);
+void 				print_for_start_end(t_data *str, t_room *room);
 
 void    			malloc_error();
 void    			map_error();

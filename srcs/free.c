@@ -62,6 +62,7 @@ void		free_path(t_plist *plist) //норма
 
 static void	free_data(t_data *str)
 {
+	//str = NULL;
 	free(str->start);
 	free(str->end);
 }
