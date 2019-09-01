@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-t_plist		*make_path_list(t_plist *prev, t_path *current) //норма
+t_plist		*make_path_list(t_plist *prev, t_path *current)
 {
 	t_plist	*plist;
 
@@ -17,7 +17,7 @@ t_plist		*make_path_list(t_plist *prev, t_path *current) //норма
 	return (plist);
 }
 
-t_path		*make_path(t_path *prev, t_room *current, int index) //норма
+t_path		*make_path(t_path *prev, t_room *current, int index)
 {
 	t_path	*path;
 
@@ -26,7 +26,7 @@ t_path		*make_path(t_path *prev, t_room *current, int index) //норма
 	{
 		if (!(path = (t_path*)ft_memalloc(sizeof(t_path))))
 			malloc_error();
-		path->next = prev;//?
+		path->next = prev;
 		path->room = current;
 		path->print_index = NOT_PRINTED;
 		if (index == 1)
@@ -37,14 +37,14 @@ t_path		*make_path(t_path *prev, t_room *current, int index) //норма
 	return (path);
 }
 
-int			check_finish(t_room *finish, t_room *current) //норма
+int			check_finish(t_room *finish, t_room *current)
 {
 	if (ft_strequ(finish->name, current->name))
 		return (1);
 	return (0);
 }
 
-void		clean_values(t_room *arr) //норма
+void		clean_values(t_room *arr)
 {
 	int		i;
 
@@ -53,7 +53,7 @@ void		clean_values(t_room *arr) //норма
 		arr[i++].value = NOT_GIVEN;
 }
 
-t_room		**make_queue()//норма
+t_room		**make_queue(void)
 {
 	t_room	**room;
 	int		i;

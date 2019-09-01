@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-void		free_pathlist(t_path *path, t_plist *plist) //норма
+void		free_pathlist(t_path *path, t_plist *plist)
 {
 	t_path	*tmp;
 	t_plist	*tmp2;
@@ -13,34 +13,16 @@ void		free_pathlist(t_path *path, t_plist *plist) //норма
 		{
 			tmp = path;
 			path = path->next;
-			free (tmp);
+			free(tmp);
 		}
 		plist = plist->next;
-		free (tmp2);
+		free(tmp2);
+		tmp2 = NULL;
 	}
 	plist = NULL;
 }
 
-// void        free_pathlist(t_path *path, t_plist *plist) //норма
-// {
-//    t_path    *tmp;
-//    t_plist    *tmp2;
-
-//    while (plist)
-//    {
-//        tmp2 = plist;
-//        while (path)
-//        {
-// 			tmp = path->next;
-//             free (path);
-// 			path = tmp;
-//        }
-//        plist = plist->next;
-//        free (tmp2);
-//    }
-// }
-
-void		free_path(t_plist *plist) //норма
+void		free_path(t_plist *plist)
 {
 	t_plist	*tmp;
 	t_path	*tmp2;
@@ -54,20 +36,19 @@ void		free_path(t_plist *plist) //норма
 	{
 		tmp2 = path;
 		path = path->next;
-		free (tmp2);
+		free(tmp2);
 	}
-	free (tmp->next);
+	free(tmp->next);
 	tmp->next = NULL;
 }
 
 static void	free_data(t_data *str)
 {
-	//str = NULL;
 	free(str->start);
 	free(str->end);
 }
 
-void		free_neighb_list(t_room *room, t_data *str) //норма
+void		free_neighb_list(t_room *room, t_data *str)
 {
 	int		i;
 	t_nlist	*tmp;
@@ -77,14 +58,14 @@ void		free_neighb_list(t_room *room, t_data *str) //норма
 	while (i < room_nb)
 	{
 		tmp = room[i].neighb;
-		free (room[i++].name);
+		free(room[i++].name);
 		while (tmp)
 		{
 			tmp2 = tmp;
 			tmp = tmp->next;
-			free (tmp2);
+			free(tmp2);
 		}
 	}
-	free (room);
+	free(room);
 	free_data(str);
 }

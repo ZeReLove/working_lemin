@@ -80,6 +80,13 @@ typedef struct		s_reading_data
 	int				number_of_pathes;
 }					t_data;
 
+typedef struct		s_norm
+	{
+		int				i;
+		int				j;
+		int				block;
+	}					t_norm;
+
 typedef struct		s_array
 {
 	int				num_of_steps;
@@ -89,9 +96,13 @@ typedef struct		s_array
 t_plist    			*algorithm(t_room *start, t_room *finish, t_room *arr);
 int					cutting_path(t_room *start, t_room *finish, t_plist *plist, int *index);
 int					both_directions(t_plist *plist, t_room *start);
-int					width_search(t_room *start, t_room *finish, t_path **path);
-int					give_values(t_room **start, t_room *finish, int cur_val);
+int					width_search(t_room *start, t_room *finish, t_path **path, int index);
 
+int					give_values(t_room **start, t_room *finish, int cur_val);
+t_room				**give_values3(t_norm *norm, t_room **start);
+void				give_values2(t_norm *norm, t_room **queue, t_nlist **tmp,
+							int *cur_val);
+int					give_values4(t_room **queue);
 t_plist				*make_path_list(t_plist *prev, t_path *current);
 t_path				*make_path(t_path *prev, t_room *current, int index);
 int					check_finish(t_room *finish, t_room *current);
@@ -111,8 +122,11 @@ void				unblock_rooms(t_plist *plist);
 
 int     			checking_data(t_data *str, t_room *room);
 int     			check_room(char **line, t_room *room, t_data *str);
-int     			check_ants(const int fd, char **line, t_room *room, t_data *str);
+void 				check_room2(char **line, t_room *room, t_data *str);
+void 				check_room3(char **line, t_room *room, t_data *str, int count);
+int     			check_ants(const int fd, char **line);
 void     			check(char *line, int fd, t_data *str, t_room *room, int *index);
+void				check2(char *line, int fd, t_data *str, t_room *room);
 void    			checking_duplicates(t_room *room, char *room_name, t_data *str);
 
 t_room				*reading_data(t_data *str, char *line, int fd);
@@ -127,6 +141,7 @@ void    			make_neighb_list(t_room *rooms, char *line, t_room *room, t_data *str
 t_array				*creating_of_array();
 int 				number_of_pathes(t_data *read, t_plist *pointers, t_array *pathes);
 void				comparing_of_values(t_array *pathes, int number_of_steps, int num_p);
+void				comparing_of_values2(t_array *pathes);
 
 void				sorting_rooms(t_room *room, int low, int high, t_data *str);
 t_room				*find_room(char *buff, t_room *room, t_data *str);
@@ -142,7 +157,8 @@ void				ants_printing(t_plist *plist, int *value_of_ants, int *array_num_ant, t_
 void 				print_for_start_end(t_data *str, t_room *room);
 
 void    			malloc_error();
-void    			map_error();
+void    			map_error(t_room *room, t_data *str);
 void                free_array_num_ant(int *array_num_ant);
+void				smth_for_main(void);
 
 #endif

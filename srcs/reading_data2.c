@@ -1,22 +1,22 @@
 #include "lem_in.h"
 
-static void	check_start_finish(t_room *room1, t_room *room2, t_data *str)//норма
+static void	check_start_finish(t_room *room1, t_room *room2, t_data *str)
 {
 	if (ft_strequ(room1->name, str->start))
 		str->start_room = room1;
-	else if(ft_strequ(room2->name, str->start))
+	else if (ft_strequ(room2->name, str->start))
 		str->start_room = room2;
-	if(ft_strequ(room1->name, str->end))
+	if (ft_strequ(room1->name, str->end))
 		str->end_room = room1;
 	else if (ft_strequ(room2->name, str->end))
 		str->end_room = room2;
 }
 
-static int	partition(t_room *room, int low, int high, t_data *str)//норма
+static int	partition(t_room *room, int low, int high, t_data *str)
 {
-	t_room pivot;
-	int i;
-	int j;
+	t_room	pivot;
+	int		i;
+	int		j;
 
 	i = (low - 1);
 	pivot = room[high];
@@ -36,7 +36,7 @@ static int	partition(t_room *room, int low, int high, t_data *str)//норма
 	return (i + 1);
 }
 
-void 		sorting_rooms(t_room *room, int low, int high, t_data *str) // норма
+void		sorting_rooms(t_room *room, int low, int high, t_data *str)
 {
 	int pi;
 
@@ -48,7 +48,7 @@ void 		sorting_rooms(t_room *room, int low, int high, t_data *str) // норма
 	}
 }
 
-t_room	*find_room(char *buff, t_room *room, t_data *str) //норма
+t_room		*find_room(char *buff, t_room *room, t_data *str)
 {
 	int start;
 	int end;
@@ -56,7 +56,7 @@ t_room	*find_room(char *buff, t_room *room, t_data *str) //норма
 	int	res;
 
 	start = 0;
-	end = room_nb - 1; //changed (-1)
+	end = room_nb - 1;
 	while (start <= end)
 	{
 		middle = (start + end) / 2;
@@ -72,7 +72,7 @@ t_room	*find_room(char *buff, t_room *room, t_data *str) //норма
 	return (NULL);
 }
 
-int		checking_dash(char *line) //норма
+int			checking_dash(char *line)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ int		checking_dash(char *line) //норма
 	return (0);
 }
 
-void	other_rooms(char *line, t_room *room, t_data *str) //норма
+void		other_rooms(char *line, t_room *room, t_data *str)
 {
 	int	i;
 

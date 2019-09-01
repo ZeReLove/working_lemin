@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-void		block_direction(t_plist *plist, t_room *start) //норма
+void		block_direction(t_plist *plist, t_room *start)
 {
 	t_path	*tmp;
 	t_plist	*tmp2;
@@ -33,7 +33,7 @@ void		block_direction(t_plist *plist, t_room *start) //норма
 	}
 }
 
-void		unblock_direction(t_plist *plist, t_room *start) //норма
+void		unblock_direction(t_plist *plist, t_room *start)
 {
 	t_path	*tmp;
 	t_plist	*tmp2;
@@ -59,7 +59,7 @@ void		unblock_direction(t_plist *plist, t_room *start) //норма
 	unblock_start(start);
 }
 
-void		unblock_start(t_room *start)//норма
+void		unblock_start(t_room *start)
 {
 	t_nlist	*tmp3;
 
@@ -72,7 +72,7 @@ void		unblock_start(t_room *start)//норма
 	}
 }
 
-void		find_room2(t_path *path, t_room *room) //норма
+void		find_room2(t_path *path, t_room *room)
 {
 	t_nlist	*tmp;
 
@@ -88,12 +88,10 @@ void		find_room2(t_path *path, t_room *room) //норма
 	}
 }
 
-int			find_room3(t_path *path, t_room *room) // не норма (+6 строк)
+int			find_room3(t_path *path, t_room *room)
 {
 	t_nlist	*tmp;
-	int		count;
 
-	count = 0;
 	tmp = path->room->neighb;
 	while (tmp)
 	{
@@ -102,45 +100,41 @@ int			find_room3(t_path *path, t_room *room) // не норма (+6 строк)
 			if (tmp->status == BLOCKED)
 			{
 				tmp->status = DELETED;
-				count++;
 				tmp = room->neighb;
 				while (tmp)
 				{
 					if (ft_strcmp(path->room->name, tmp->room->name))
 					{
 						tmp->status = DELETED;
-						break ;
+						return (1);
 					}
 					tmp = tmp->next;
 				}
 			}
-			break ;
+			return (0);
 		}
 		tmp = tmp->next;
 	}
-	if (count != 0)
-		return (1);
 	return (0);
 }
 
-void		unblock_rooms(t_plist *plist) // норма
+void		unblock_rooms(t_plist *plist)
 {
 	t_plist	*tmp;
 	t_path	*tmp2;
 
 	if (plist)
 	{
-		tmp =  plist;
+		tmp = plist;
 		while (tmp)
 		{
 			tmp2 = tmp->path;
-				while (tmp2 && tmp2->room)
-				{
-					tmp2->room->status = OPENED;
-					tmp2 = tmp2->next;
-				}
-				tmp = tmp->next;
+			while (tmp2 && tmp2->room)
+			{
+				tmp2->room->status = OPENED;
+				tmp2 = tmp2->next;
+			}
+			tmp = tmp->next;
 		}
-
 	}
 }

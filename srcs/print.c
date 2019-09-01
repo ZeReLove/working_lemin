@@ -12,13 +12,12 @@
 
 #include "lem_in.h"
 
-void 		ants_going_through_graph(t_plist *pointers, int num_of_pathes, t_data *read) //норма
+void		ants_going_through_graph(t_plist *pointers, int num_of_pathes,
+					t_data *read)
 {
-	int 	value_of_ants;
-	int 	*array_num_ant;
-	int		count;
+	int		value_of_ants;
+	int		*array_num_ant;
 
-	count = 1;
 	array_num_ant = (int*)ft_memalloc(sizeof(int) * read->amount_of_ants);
 	ft_arrset(array_num_ant, -1, read->amount_of_ants);
 	value_of_ants = 0;
@@ -35,15 +34,13 @@ void 		ants_going_through_graph(t_plist *pointers, int num_of_pathes, t_data *re
 		if (!value_of_ants)
 			break ;
 		ants_inside(pointers, num_of_pathes, read);
-		count++;
 	}
-	printf("\n");
-	printf("%i", count);
-    free(array_num_ant);
+	ft_printf("\n");
+	free(array_num_ant);
 	free(read->delta);
 }
 
-void		ants_inside(t_plist *pointers, int j, t_data *read)//норма
+void		ants_inside(t_plist *pointers, int j, t_data *read)
 {
 	t_plist *tmp;
 	t_path	*tmp2;
@@ -69,9 +66,10 @@ void		ants_inside(t_plist *pointers, int j, t_data *read)//норма
 	}
 }
 
-void		moving_ants(int *array_num_ant, t_data *read, int *value_of_ants, t_plist *plist) //норма
+void		moving_ants(int *array_num_ant, t_data *read, int *value_of_ants,
+						t_plist *plist)
 {
-	int 	j;
+	int		j;
 	t_plist	*tmp;
 
 	tmp = plist;
@@ -87,21 +85,20 @@ void		moving_ants(int *array_num_ant, t_data *read, int *value_of_ants, t_plist 
 	}
 }
 
-void print_for_start_end(t_data *str, t_room *room)
+void		print_for_start_end(t_data *str, t_room *room)
 {
 	int		count;
-	
+
 	count = 1;
 	if (checking_data(str, room))
 	{
 		while (count <= str->amount_of_ants)
 		{
 			if (count != str->amount_of_ants)
-				printf("L%i-%s ", count, str->end);
+				ft_printf("L%i-%s ", count, str->end);
 			else
-				printf("L%i-%s\n", count, str->end);
+				ft_printf("L%i-%s\n", count, str->end);
 			count++;
 		}
-		
 	}
 }

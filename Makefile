@@ -12,9 +12,9 @@ print	handle_errors	print2
 SRC = $(addprefix $(SRCDIR), $(addsuffix .c,$(FILES)))
 OBJ = $(addprefix $(OBJDIR),$(addsuffix .o,$(FILES)))
 
-LIBFT = ./libft/libft.a 
+LIBFT = ./libft/libftprintf.a 
 INCDIR = -I ./includes
-LIBLINK = -L ./libft -lft
+LIBLINK = -L ./libft -lftprintf
 LIBINC = -I ./libft/includes
 
 all: $(LIBFT) $(NAME)

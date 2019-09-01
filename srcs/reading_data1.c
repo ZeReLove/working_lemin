@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-static void set_neighb(t_room *room)//норма
+static void	set_neighb(t_room *room)
 {
 	int		i;
 
@@ -13,55 +13,68 @@ void		read_start(char *line, int fd, t_data *str, t_room *room)
 {
 	if (!idx_for_start)
 	{
-		printf("%s\n", line);
+		ft_printf("%s\n", line);
 		free(line);
 		if (!get_next_line(fd, &line))
+		{
+			free(line);
 			map_error(room, str);
-		if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#'))
+		}
+		while (line[0] == '#')
 		{
 			free(line);
 			get_next_line(fd, &line);
 		}
 		check_room(&line, room, str);
-		printf("%s\n", line);
+		ft_printf("%s\n", line);
 		make_start(str, room, line);
 		idx_for_start = 1;
 	}
+	else
+		free(line);
 }
 
 void		read_end(char *line, int fd, t_data *str, t_room *room)
 {
 	if (!idx_for_end)
 	{
-		printf("%s\n", line);
+		ft_printf("%s\n", line);
 		free(line);
 		if (!get_next_line(fd, &line))
+		{
+			free(line);
 			map_error(room, str);
-		//if ((line[0] == '#' && line[1] != '#'))
-		if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#'))// ?????????????????
+		}
+		while (line[0] == '#')
 		{
 			free(line);
 			get_next_line(fd, &line);
 		}
 		check_room(&line, room, str);
-		printf("%s\n", line);
+		ft_printf("%s\n", line);
 		make_end(str, room, line);
 		idx_for_end = 1;
 	}
+	else
+		free(line);
 }
 
-t_room		*reading_data(t_data *str, char *line, int fd)//норма
+t_room		*reading_data(t_data *str, char *line, int fd)
 {
 	t_room	*room;
-	int 	index;
+	int		index;
 
 	index = 0;
 	room = make_struct_arr();
 	if (!check_ants(fd, &line, room, str))
+	{
+		free(line);
+		line = NULL;
 		map_error(room, str);
+	}
 	str->amount_of_ants = ft_atoi(line);
-    free(line);                    /// valgrind
-    line = NULL;
+	free(line);
+	line = NULL;
 	index1 = str->amount_of_ants;
 	index3 = str->amount_of_ants - 1;
 	while (get_next_line(fd, &line))
@@ -69,7 +82,7 @@ t_room		*reading_data(t_data *str, char *line, int fd)//норма
 	return (room);
 }
 
-void		room_connections(t_room *room, char *line, t_data *str) //норма
+void		room_connections(t_room *room, char *line, t_data *str)
 {
 	int		i;
 	t_room	*r;
@@ -86,7 +99,7 @@ void		room_connections(t_room *room, char *line, t_data *str) //норма
 	index_for_rc = 1;
 }
 
-void		make_start(t_data *str, t_room *room, char *line) //норма
+void		make_start(t_data *str, t_room *room, char *line)
 {
 	int		i;
 
@@ -108,7 +121,7 @@ void		make_start(t_data *str, t_room *room, char *line) //норма
 	room_nb++;
 }
 
-void		make_end(t_data *str, t_room *room, char *line) //норма
+void		make_end(t_data *str, t_room *room, char *line)
 {
 	int		i;
 
@@ -126,27 +139,28 @@ void		make_end(t_data *str, t_room *room, char *line) //норма
 	room[room_nb].neighb = NULL;
 	room[room_nb].is_ant_inside = 3;
 	str->end_room = &room[room_nb];
-    free(line);
-    line = NULL;
+	free(line);
+	line = NULL;
 	room_nb++;
 }
 
-t_room		*make_struct_arr() // норма 
+t_room		*make_struct_arr(void)
 {
 	t_room	*room;
-	
+
 	if (!(room = (t_room*)ft_memalloc(sizeof(t_room) * MAXV)))
 		malloc_error();
 	set_neighb(room);
 	return (room);
 }
 
-void		make_neighb_list(t_room *rooms, char *line, t_room *room, t_data *str)//норма
+void		make_neighb_list(t_room *rooms, char *line, t_room *room,
+				t_data *str)
 {
-    t_nlist *new;
+	t_nlist *new;
 	t_nlist *temp;
 
-    if (!(new = (t_nlist*)ft_memalloc(sizeof(t_nlist))))
+	if (!(new = (t_nlist*)ft_memalloc(sizeof(t_nlist))))
 		malloc_error();
 	temp = room->neighb;
 	if (temp)
